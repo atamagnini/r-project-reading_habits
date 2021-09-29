@@ -1,4 +1,4 @@
-# Reading habit dataset
+# Reading habits
 
 ## r-project-reading_habits
 
