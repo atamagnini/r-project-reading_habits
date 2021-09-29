@@ -3,25 +3,24 @@ library(hrbrthemes)
 library(highcharter)
 library(htmlwidgets)
 
-ds <- read.csv("D:/R scripts/script_290920_Reading_habits/Reading habit Dataset/dataset.csv",
-               stringsAsFactors = FALSE)
+ds <- read.csv("~/dataset.csv", stringsAsFactors = FALSE)
 df <- as.data.frame(ds)
+
 #Remove duplicated data from all columns
 df2 <- df %>% distinct()
+
 #Remove and rename columns
 df3 <- df2[, -c(3:7, 9:14)]
 colnames(df3)[3] <- 'Books'
+
 #Calculate means
 table(df3$Age, df3$Sex)
 df4 <- df3 %>% group_by(Age, Sex) %>% summarise(Books = round(mean(Books),0))
+
 #Formating columns
 glimpse(df4)
 df4$Sex <- as.factor(as.character(df4$Sex))
 df4$Age <- as.factor(as.integer(df4$Age))
-#df5 <- spread(df4, Sex, Books)
-#df6 <- df6 %>% arrange(Female)
-#df6$id <- seq.int(nrow(df6)) #new column with id (number of rows)
-#df6 <- mutate(df6, Male = -Male)
 
 #Plot
 df5 <- df4[-c(141:152),]
